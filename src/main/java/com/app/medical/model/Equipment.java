@@ -3,13 +3,12 @@ package com.app.medical.model;
 
 import lombok.*;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "equipment")
 public class Equipment {
 	
 	  @Id

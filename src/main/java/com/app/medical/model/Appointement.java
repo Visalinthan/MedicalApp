@@ -1,23 +1,25 @@
 package com.app.medical.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import lombok.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "appointement")
 public class Appointement {
 	
 	  @Id
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	  private Long id;
 	  
-	  private ArrayList<Patient>  paient ;
-	  private ArrayList<MedicalServices> medicalservices ;
-	  private LocalDate  date ;
+	  private ArrayList<Patient> paient ;
+	  //private ArrayList<MedicalServices> medicalservices ;
+	  private LocalDate date ;
 	  private String hour ;
 	  private String description ;
 	  //private boolean  notification ;
