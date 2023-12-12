@@ -25,4 +25,20 @@ public class MedecinService {
     public Medecin saveMedecin(Medecin medecin){
         return this.medecinRepo.save(medecin);
     }
+
+    //méthode de suppression médecin
+    public  void  deleteMedecin(Long id) {
+
+        /*if(id != null) {
+            this.teamRepository.deleteById(id);
+        }  else   {
+            throw new TeamInvalidException("Suppression échoué :");
+        }*/
+        this.medecinRepo.deleteById(id);
+
+    }
+
+
+
+
 }

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/medecin")
+@RequestMapping("/medecin")
 public class MedecinController {
     @Autowired
     MedecinService medecinService;
@@ -37,5 +37,13 @@ public class MedecinController {
         if(newMedecin == null) throw new AddException("Impossible d'ajouter le medecin");
 
         return new ResponseEntity<Medecin>(medecin, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteMedecin(@PathVariable Long id) {
+
+         medecinService.deleteMedecin(id);
+
+         return ResponseEntity.noContent().build();
     }
 }

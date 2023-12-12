@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/patient")
+@RequestMapping("/patient")
 public class PatientController {
     @Autowired
     PatientService patientService;
@@ -38,4 +38,13 @@ public class PatientController {
 
         return new ResponseEntity<Patient>(patient, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deletePatient(@PathVariable Long id) {
+
+        patientService.deletePatient(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
 }

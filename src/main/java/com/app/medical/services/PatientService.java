@@ -23,4 +23,15 @@ public class PatientService {
     public Patient savePatient(Patient patient){
         return this.patientRepo.save(patient);
     }
+
+    public  void  deletePatient(Long id) {
+
+        /*if(id != null) {
+            this.teamRepository.deleteById(id);
+        }  else   {
+            throw new TeamInvalidException("Suppression échoué :");
+        }*/
+        this.patientRepo.deleteById(id);
+
+    }
 }
