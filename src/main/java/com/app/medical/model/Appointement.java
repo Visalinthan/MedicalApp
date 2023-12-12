@@ -19,7 +19,7 @@ public class Appointement {
 	  
 	  private ArrayList<Patient> paient ;
 	  //private ArrayList<MedicalServices> medicalservices ;
-	  private LocalDate date ;
+	  private String date ;
 	  private String hour ;
 	  private String description ;
 	  //private boolean  notification ;
