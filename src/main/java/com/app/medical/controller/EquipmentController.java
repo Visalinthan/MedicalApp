@@ -1,6 +1,8 @@
-package com.app.medical.controller.exceptions;
+package com.app.medical.controller;
 
 
+import com.app.medical.controller.exceptions.AddException;
+import com.app.medical.controller.exceptions.NotFound;
 import com.app.medical.model.Equipment;
 import com.app.medical.services.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
