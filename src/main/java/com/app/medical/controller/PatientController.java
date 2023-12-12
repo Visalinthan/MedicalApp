@@ -2,6 +2,7 @@ package com.app.medical.controller;
 
 import com.app.medical.controller.exceptions.AddException;
 import com.app.medical.controller.exceptions.NotFound;
+import com.app.medical.dto.UserDto;
 import com.app.medical.model.Patient;
 import com.app.medical.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,15 @@ public class PatientController {
     @Autowired
     PatientService patientService;
 
+    @PostMapping("/login")
+    public ResponseEntity<?> loginPatient(@RequestBody UserDto user){
+        Patient patient = patientService.findByEmail(user.getEmail());
+        if(patient.getPassword().equals(user.getPassword())){
+            return ResponseEntity.ok(patient);
+        }
+        return (ResponseEntity<?>) ResponseEntity.internalServerError();
+    }
+
     @GetMapping("/list")
     public List<Patient> listOfAllPatient() {
         return patientService.list();
@@ -31,7 +41,7 @@ public class PatientController {
 
     @PostMapping("/add")
     public ResponseEntity<Patient> addPatient(@RequestBody Patient patient) {
-
+        patient.setRole("patient");
         Patient newPatient = patientService.savePatient(patient);
 
         if(newPatient == null) throw new AddException("Impossible d'ajouter le patient");

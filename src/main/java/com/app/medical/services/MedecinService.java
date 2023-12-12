@@ -22,6 +22,8 @@ public class MedecinService {
 
     public Optional<Medecin> findById(Long id){return this.medecinRepo.findById(id);}
 
+    public Medecin findByEmail(String email){return this.medecinRepo.findByEmail(email);}
+
     public Medecin saveMedecin(Medecin medecin){
         return this.medecinRepo.save(medecin);
     }
