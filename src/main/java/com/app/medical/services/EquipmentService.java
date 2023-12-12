@@ -13,7 +13,7 @@ public class EquipmentService {
     private EquipmentRepo  equipmentRepo;
 
 
-    public EquipmentService(EquipmentRepo quipmentRepo) {
+    public EquipmentService(EquipmentRepo equipmentRepo) {
         this.equipmentRepo =equipmentRepo ;
     }
 
