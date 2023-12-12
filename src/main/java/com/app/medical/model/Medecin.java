@@ -16,10 +16,18 @@ public class Medecin {
     private Long id;
     private String firstName;
     private String lastName;
-    private ArrayList<MedicalServices> specialities ;
-    private String  hopital ;
-    private double rate;
-    private String cin ;
-    private String  phone ;
+    private String  phone;
+
+    private String address;
+    private String gender;
+    private String birthdate;
+
+    private String cin;
+
+    @Column(unique=true)
     private String  email;
+    private String password;
+    private String role;
+
+    private ArrayList<MedicalServices> specialities ;
 }

@@ -1,5 +1,6 @@
 package com.app.medical.services;
 
+import com.app.medical.model.Medecin;
 import com.app.medical.model.Patient;
 import com.app.medical.repository.PatientRepo;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ public class PatientService {
     public List<Patient> list(){return this.patientRepo.findAll();}
 
     public Optional<Patient> findById(Long id){return this.patientRepo.findById(id);}
+
+    public Patient findByEmail(String email){return this.patientRepo.findByEmail(email);}
 
     public Patient savePatient(Patient patient){
         return this.patientRepo.save(patient);
