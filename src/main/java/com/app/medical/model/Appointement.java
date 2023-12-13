@@ -4,27 +4,32 @@ import javax.persistence.*;
 
 import lombok.*;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Appointement {
-	
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	  private Long id;
-	  
-	  private ArrayList<Patient> paient ;
-	  //private ArrayList<MedicalServices> medicalservices ;
-	  private String date ;
-	  private String hour ;
-	  private String description ;
-	  //private boolean  notification ;
-	  private String typofillness ;
-	  
-	  
-	  
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String date ;
+	private String hour ;
+	private String typofillness ;
+	private String description ;
+
+	@JoinColumn(name = "medecin_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Medecin medecin;
+
+	@JoinColumn(name = "patient_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Patient patient;
+
+	@JoinColumn(name = "service_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private MedicalServices medicalServices;
+
+
 }

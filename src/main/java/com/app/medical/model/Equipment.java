@@ -1,6 +1,5 @@
 package com.app.medical.model;
 
-
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,7 +14,7 @@ public class Equipment {
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	  private Long id;
       private String name;
-	  private String busy;
+	  private boolean busy;
 	  private String type ;
 	  
 	  

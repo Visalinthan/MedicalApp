@@ -1,8 +1,12 @@
 package com.app.medical.model;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -13,12 +17,12 @@ public class MedicalServices {
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 private Long id;
-	 
 	 private String name ;
-	 private ArrayList<Equipment> equipments ;
-	 private String  localisation;
-	 private String  email ;
-	 private String phone;
+
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private List<Equipment> equipments = new ArrayList<>();
 	 
 
 }
