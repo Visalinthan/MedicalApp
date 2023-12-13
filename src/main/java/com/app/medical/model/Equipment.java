@@ -17,6 +17,10 @@ public class Equipment {
       private String name;
 	  private String busy;
 	  private String type ;
+
+	@ManyToOne
+	@JoinColumn(name = "medicalservices_id")
+	private MedicalServices medicalServices;
 	  
 	  
 }
