@@ -22,6 +22,10 @@ public class AppointementService {
 
     public Optional<Appointement> findById(Long id){return this.appointementRepo.findById(id);}
 
+    public List<Appointement> findByPatientId(Long id){return this.appointementRepo.findByPatientId(id);}
+
+    public List<Appointement> findByMedecinId(Long id){return this.appointementRepo.findByMedecinId(id);}
+
     public  Appointement saveAppointement(Appointement appointement){
         return this.appointementRepo.save(appointement);
     }

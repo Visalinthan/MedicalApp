@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/medicalfile")
+@RequestMapping("api/medicalfile")
 public class MedicalFileController {
     @Autowired
     MedicalFileService medicalFileService;

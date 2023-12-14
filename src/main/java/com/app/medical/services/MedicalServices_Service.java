@@ -21,7 +21,7 @@ public class MedicalServices_Service {
 
     public Optional<MedicalServices> findById(Long id){return this.medicalServicesRepo.findById(id);}
 
-    public  MedicalServices saveAppointement(MedicalServices medicalServices){
+    public  MedicalServices saveMedicalServices(MedicalServices medicalServices){
         return this.medicalServicesRepo.save(medicalServices);
     }
 

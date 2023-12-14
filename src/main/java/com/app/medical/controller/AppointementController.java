@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/appointement")
+@RequestMapping("api/appointement")
 public class AppointementController {
     @Autowired
     AppointementService  appointementService;
@@ -23,6 +23,16 @@ public class AppointementController {
     @GetMapping("/list")
     public List<Appointement> listOfAllAppointements() {
         return appointementService.list();
+    }
+
+    @GetMapping("/listpatient/{id}")
+    public List<Appointement> listByPatient(@PathVariable Long id) {
+        return appointementService.findByPatientId(id);
+    }
+
+    @GetMapping("/listmedecin/{id}")
+    public List<Appointement> listByMedecin(@PathVariable Long id) {
+        return appointementService.findByMedecinId(id);
     }
 
     @GetMapping("/get/{id}")
