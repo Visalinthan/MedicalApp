@@ -19,6 +19,19 @@ public class PatientController {
     @Autowired
     PatientService patientService;
 
+    @PostMapping("/login")
+    public ResponseEntity<?> loginPatient(@RequestBody UserDto user) {
+        AddException msg = new AddException("Identifiant or password incorrect");
+        Patient patient = patientService.findByEmail(user.getEmail());
+        if (patient == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg.getMessage());
+        if (patient.getPassword().equals(user.getPassword())) {
+            return ResponseEntity.ok(patient);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg.getMessage());
+        }
+    }
+
     @GetMapping("/list")
     public List<Patient> listOfAllPatient() {
         return patientService.list();

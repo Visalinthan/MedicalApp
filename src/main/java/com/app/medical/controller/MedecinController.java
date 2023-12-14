@@ -20,6 +20,19 @@ public class MedecinController {
     @Autowired
     MedecinService medecinService;
 
+    @PostMapping("/login")
+    public ResponseEntity<?> loginMedecin(@RequestBody UserDto user) {
+        AddException msg = new AddException("Identifiant or password incorrect");
+        Medecin medecin = medecinService.findByEmail(user.getEmail());
+        if (medecin == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg.getMessage());
+        if (medecin.getPassword().equals(user.getPassword())) {
+            return ResponseEntity.ok(medecin);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg.getMessage());
+        }
+    }
+
     @GetMapping("/list")
     public List<Medecin> listOfAllMedecin() {
         return medecinService.list();
@@ -44,8 +57,8 @@ public class MedecinController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteMedecin(@PathVariable Long id) {
 
-         medecinService.deleteMedecin(id);
+        medecinService.deleteMedecin(id);
 
-         return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build();
     }
 }
