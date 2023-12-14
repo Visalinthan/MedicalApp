@@ -23,6 +23,7 @@ public class MedicalServices {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Equipment> equipments = new ArrayList<>();
-	 
+
+
 
 }

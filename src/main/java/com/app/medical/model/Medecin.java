@@ -10,21 +10,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
+//@NoArgsConstructor
 @Entity
 public class Medecin extends User{
-    private String cin;
+
     private double rate;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    /*@ManyToMany(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)*/
+
+    //@JoinColumn(name = "medicalservice_id")
+    //pour éviter conflit de Suppression dans table jointure
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<MedicalServices> specialities = new ArrayList<>() ;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<MedicalServices> medicalServices = new ArrayList<MedicalServices>();;
+
+
+    /*@OneToMany(mappedBy="medecin", fetch=FetchType.LAZY, cascade = CascadeType.ALL)*/
+    //private List<Appointement> appointements = new ArrayList<Appointement>();*/
+
+
+
+    public Medecin()  {
+
+    }
 
     @Builder
     public Medecin(Long id, String firstName, String lastName, String phone, String address, String gender, String birthdate, String role, String email, String password, String cin, double rate) {
-        super(id, firstName, lastName, phone, address, gender, birthdate, role, email, password);
-        this.cin = cin;
+        super(id, firstName, lastName, phone, address, gender, birthdate, role, email, password,cin);
+
         this.rate = rate;
     }
 

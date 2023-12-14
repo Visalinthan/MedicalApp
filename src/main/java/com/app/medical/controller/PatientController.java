@@ -19,14 +19,14 @@ public class PatientController {
     @Autowired
     PatientService patientService;
 
-    @PostMapping("/login")
+    /*@PostMapping("/login")
     public ResponseEntity<?> loginPatient(@RequestBody UserDto user){
-        Patient patient = patientService.findByEmail(user.getEmail());
+        //Patient patient = patientService.findByEmail(user.getEmail());
         if(patient.getPassword().equals(user.getPassword())){
             return ResponseEntity.ok(patient);
         }
         return (ResponseEntity<?>) ResponseEntity.internalServerError();
-    }
+    }*/
 
     @GetMapping("/list")
     public List<Patient> listOfAllPatient() {
@@ -41,7 +41,8 @@ public class PatientController {
 
     @PostMapping("/add")
     public ResponseEntity<Patient> addPatient(@RequestBody Patient patient) {
-        patient.setRole("patient");
+        //patient.setRole("patient");
+        //patient.s
         Patient newPatient = patientService.savePatient(patient);
 
         if(newPatient == null) throw new AddException("Impossible d'ajouter le patient");

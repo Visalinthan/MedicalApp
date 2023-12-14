@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
+/*@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MedecinDto extends User {
+/*public class MedecinDto extends User {
     private String cin;
     private double rate;
 
 
     private List<String> specialities;
-}
+}*/
