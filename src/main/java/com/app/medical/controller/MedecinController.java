@@ -20,15 +20,6 @@ public class MedecinController {
     @Autowired
     MedecinService medecinService;
 
-    @PostMapping("/login")
-    public ResponseEntity<?> loginMedecin(@RequestBody UserDto user){
-        Medecin medecin = medecinService.findByEmail(user.getEmail());
-        if(medecin.getPassword().equals(user.getPassword())){
-            return ResponseEntity.ok(medecin);
-        }
-        return (ResponseEntity<?>) ResponseEntity.internalServerError();
-    }
-
     @GetMapping("/list")
     public List<Medecin> listOfAllMedecin() {
         return medecinService.list();

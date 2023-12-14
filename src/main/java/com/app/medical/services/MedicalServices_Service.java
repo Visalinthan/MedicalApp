@@ -14,7 +14,7 @@ public class MedicalServices_Service {
 
 
     public MedicalServices_Service(MedicalServicesRepo medicalServicesRepo) {
-        this.medicalServicesRepo =medicalServicesRepo ;
+        this.medicalServicesRepo = medicalServicesRepo ;
     }
 
     public List<MedicalServices> list(){return this.medicalServicesRepo.findAll();}

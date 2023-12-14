@@ -19,15 +19,6 @@ public class PatientController {
     @Autowired
     PatientService patientService;
 
-    @PostMapping("/login")
-    public ResponseEntity<?> loginPatient(@RequestBody UserDto user){
-        Patient patient = patientService.findByEmail(user.getEmail());
-        if(patient.getPassword().equals(user.getPassword())){
-            return ResponseEntity.ok(patient);
-        }
-        return (ResponseEntity<?>) ResponseEntity.internalServerError();
-    }
-
     @GetMapping("/list")
     public List<Patient> listOfAllPatient() {
         return patientService.list();

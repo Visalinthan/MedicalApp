@@ -15,6 +15,10 @@ public class MedicalFile {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@JoinColumn(name = "patient_id")
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Patient patient;
+
 
 
 }

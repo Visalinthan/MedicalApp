@@ -31,19 +31,19 @@ INSERT INTO `patient` (`address`, `birthdate`, `email`, `first_name`, `gender`, 
 ('Adresse Patient 3', '1980-09-05', 'patient3@email.com', 'Patient', 'Femme', 'Nom Patient 3', 'password_patient3', '777888999', 'Patient');
 
 -- Insertion de données pour la table `appointement`
-INSERT INTO `appointement` (`date`, `description`, `hour`, `typofillness`, `medecin_id`, `service_id`, `patient_id`) VALUES
-('2023-03-01', 'Consultation de routine', '10:00', 'Grippe', 1, 1, 1),
-('2023-03-02', 'Radiographie du genou', '14:30', 'Problème orthopédique', 3, 2, 2),
-('2023-03-03', 'Consultation cardiaque', '11:15', 'Palpitations', 2, 4, 3);
+INSERT INTO `appointement` (`date`, `description`, `hour`, `typofillness`, `medecin_id`, `patient_id`) VALUES
+('2023-03-01', 'Consultation de routine', '10:00', 'Grippe', 1, 1),
+('2023-03-02', 'Radiographie du genou', '14:30', 'Problème orthopédique', 3, 2),
+('2023-03-03', 'Consultation cardiaque', '11:15', 'Palpitations', 2, 3);
 
 -- Insertion de données pour la table `medecin_specialities`
-INSERT INTO `medecin_specialities` (`medecin_id`, `specialities_id`) VALUES
+INSERT INTO `medecin_medical_services` (`medecin_id`, `medical_services_id`) VALUES
 (1, 1),
 (2, 4),
 (3, 3);
 
 -- Insertion de données pour la table `medical_file`
-INSERT INTO `medical_file` VALUES
+INSERT INTO `medical_file` (`patient_id`) VALUES
 (1),
 (2),
 (3);

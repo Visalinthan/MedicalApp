@@ -23,7 +23,7 @@ public class User {
     private String birthdate;
     private String role;
     @Column(unique=true)
-    private String  email;
+    private String email;
     private String password;
 
 }
