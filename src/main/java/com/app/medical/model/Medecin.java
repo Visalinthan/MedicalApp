@@ -36,11 +36,8 @@ public class Medecin extends User{
 
     }
 
-    @Builder
     public Medecin(Long id, String firstName, String lastName, String phone, String address, String gender, String birthdate, String role, String email, String password, String cin, double rate) {
-        super(id, firstName, lastName, phone, address, gender, birthdate, role, email, password,cin);
-
+        super(id, firstName, lastName, phone, address, gender, birthdate, role, email, password, cin);
         this.rate = rate;
     }
-
 }

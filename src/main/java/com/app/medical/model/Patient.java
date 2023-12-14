@@ -11,18 +11,18 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Patient extends User{
+public class Patient extends User {
 
 
     //Relation Mappage
 
 
-
     public Patient() {
 
     }
-    public Patient(Long id, String firstName, String lastName, String phone, String address, String gender, String birthdate, String role, String email, String password,
-                   String cin) {
+
+    public Patient(Long id, String firstName, String lastName, String phone, String address, String gender, String birthdate, String role, String email, String password, String cin) {
         super(id, firstName, lastName, phone, address, gender, birthdate, role, email, password, cin);
     }
 }
+

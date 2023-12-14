@@ -3,6 +3,8 @@ package com.app.medical.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 //@Data
 //@AllArgsConstructor
@@ -17,18 +19,21 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-    private String phone ;
+    private String phone;
     private String address;
     private String gender;
     private String birthdate;
     private String role;
-    @Column(unique=true)
-    private String  email;
+    @Column(unique = true)
+    private String email;
     private String password;
 
-    String cin ;
+    String cin;
 
-    public User ()  {
+    //private List<Appointement> appointement = new ArrayList<Appointement>();
+
+
+    public User() {
 
     }
 
@@ -44,7 +49,9 @@ public class User {
         this.role = role;
         this.email = email;
         this.password = password;
-        this.cin=cin;
+        this.cin = cin;
+        //this.appointement =appointement;
+
     }
 
 
@@ -92,6 +99,7 @@ public class User {
         return cin;
     }
 
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -135,4 +143,7 @@ public class User {
     public void setCin(String cin) {
         this.cin = cin;
     }
+
+
 }
+

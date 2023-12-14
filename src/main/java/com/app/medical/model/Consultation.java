@@ -22,8 +22,8 @@ public class Consultation {
     private String motif;
     private String consulationDate;
     private double price;
-    private Prescription prescription;
-    private Patient patient;
+    //private Prescription prescription;
+    //private Patient patient;
 
 
 
@@ -31,5 +31,12 @@ public class Consultation {
     public Consultation() {
 
     }
+
+
+
+    public double getPrice() {
+        return price;
+    }
+
 
 }

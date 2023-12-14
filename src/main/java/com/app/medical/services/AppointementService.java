@@ -2,6 +2,8 @@ package com.app.medical.services;
 
 import com.app.medical.model.Appointement;
 
+import com.app.medical.model.Consultation;
+import com.app.medical.model.Prescription;
 import com.app.medical.repository.AppointementRepo;
 
 import org.springframework.stereotype.Service;
@@ -38,6 +40,17 @@ public class AppointementService {
 
     }
 
+    public List<Appointement>  getAppointmentsById(Long id) {
+        return this.appointementRepo.findByPatientId(id);
+    }
+
+    public List<Consultation>  getConsultationById(Long id) {
+        return this.appointementRepo.findByConsultationId(id);
+    }
+
+    public List<Prescription>  getPrescriptionById(Long id) {
+        return this.appointementRepo.findByPrescriptionId(id);
+    }
 
 
 

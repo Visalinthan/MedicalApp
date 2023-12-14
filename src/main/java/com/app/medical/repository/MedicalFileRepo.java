@@ -13,5 +13,5 @@ import java.util.Map;
 @Repository
 public interface MedicalFileRepo extends JpaRepository<MedicalFile, Long> {
 
-    public Map<String,String> getStatistiquesById(int id_patient) throws SQLException;
+
 }

@@ -5,7 +5,9 @@ import com.app.medical.model.MedicalFile;
 import com.app.medical.repository.MedicalFileRepo;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -36,6 +38,7 @@ public class MedicalFileService {
         this.medicalfileRepo.deleteById(id);
 
     }
+
 
 
 
