@@ -5,14 +5,12 @@ import com.app.medical.dto.UserDto;
 import com.app.medical.model.Medecin;
 import com.app.medical.model.Patient;
 import com.app.medical.model.User;
+import com.app.medical.security.AuthenticationBean;
 import com.app.medical.services.MedecinService;
 import com.app.medical.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -24,6 +22,10 @@ public class LoginController {
     @Autowired
     MedecinService medecinService;
 
+    @GetMapping(path = "/basicauth")
+    public AuthenticationBean basicauth() {
+        return new AuthenticationBean("You are authenticated");
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody UserDto userDto){

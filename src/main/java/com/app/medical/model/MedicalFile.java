@@ -19,6 +19,4 @@ public class MedicalFile {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Patient patient;
 
-
-
 }

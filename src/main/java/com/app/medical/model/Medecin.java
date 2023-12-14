@@ -13,8 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@PrimaryKeyJoinColumn( name = "user_id" )
 public class Medecin extends User{
-    private String cin;
+
     private double rate;
 
 

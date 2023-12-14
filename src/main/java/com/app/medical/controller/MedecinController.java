@@ -33,7 +33,7 @@ public class MedecinController {
 
     @PostMapping("/add")
     public ResponseEntity<Medecin> addMedecin(@RequestBody Medecin medecin) {
-        medecin.setRole("medecin");
+
         Medecin newMedecin = medecinService.saveMedecin(medecin);
 
         if(newMedecin == null) throw new AddException("Impossible d'ajouter le medecin");
