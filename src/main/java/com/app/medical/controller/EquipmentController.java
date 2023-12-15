@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/equipment")
+@RequestMapping("/api/equipment")
 public class EquipmentController {
     @Autowired
     EquipmentService  equipmentService;

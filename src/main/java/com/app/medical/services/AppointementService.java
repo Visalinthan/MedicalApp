@@ -44,13 +44,9 @@ public class AppointementService {
         return this.appointementRepo.findByPatientId(id);
     }
 
-    public List<Consultation>  getConsultationById(Long id) {
-        return this.appointementRepo.findByConsultationId(id);
-    }
 
-    public List<Prescription>  getPrescriptionById(Long id) {
-        return this.appointementRepo.findByPrescriptionId(id);
-    }
+
+
 
 
 

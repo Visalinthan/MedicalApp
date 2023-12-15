@@ -39,8 +39,15 @@ public class ConsultationService {
 
     }
 
+    public List<Consultation>  getConsultationById(Long id) {
+        return this.consultationRepo.findAllById(id);
+    }
 
 
+    public double getConsultationPriceById(Long consultationId) {
+        Consultation consultation = consultationRepo.findById(consultationId).orElse(null);
+        return (consultation != null) ? consultation.getPrice() : 0.0;
+    }
 
 
 

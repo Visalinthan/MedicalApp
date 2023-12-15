@@ -31,10 +31,10 @@ INSERT INTO `patient` (`address`, `birthdate`, `email`, `first_name`, `gender`, 
 ('Adresse Patient 3', '1980-09-05', 'patient3@email.com', 'Patient', 'Femme', 'Nom Patient 3', 'password_patient3', '777888999', 'Patient');
 
 -- Insertion de données pour la table `appointement`
-INSERT INTO `appointement` (`date`, `description`, `hour`, `typofillness`, `medecin_id`, `patient_id`) VALUES
-('2023-03-01', 'Consultation de routine', '10:00', 'Grippe', 1,  1),
-('2023-03-02', 'Radiographie du genou', '14:30', 'Problème orthopédique', 2,  2),
-('2023-03-03', 'Consultation cardiaque', '11:15', 'Palpitations', 3,  3);
+INSERT INTO `appointement` (`date`, `description`, `hour`, `typofillness`, `medecin_id`, `patient_id`, `presciption_id`) VALUES
+('2023-04-01', 'problème respiratoire', '10:00', 'respiration', 1,  1,1),
+('2023-05-02', 'Problème du genou', '14:30', 'orthopédique', 2,  2,2),
+('2023-06-03', 'Problème cardiaque', '11:15', 'Palpitations', 3,  3,3);
 
 -- Insertion de données pour la table `medecin_specialities`
 INSERT INTO `medecin_medical_services` (`medecin_id`, `medical_services_id`) VALUES
@@ -54,3 +54,18 @@ INSERT INTO `medical_services_equipments` (`medical_services_id`, `equipments_id
 (2, 2),
 (3, 3),
 (4, 4);
+
+
+-- Insertion de données pour la table `prescription`
+INSERT INTO `prescription` (`date_of_prescription`, `description`, `medication_list`, `title`) VALUES
+('2023-04-01', 'procedure crise asthme', 'flutiform', 'pneummologie'),
+('2023-05-02', 'IRM pour pbe de genou', 'antiinflammatoire', 'Radiographie du genou' ),
+('2023-06-03', 'sténose valave cardiaque', 'aspirin', 'pbe cardique ');
+
+
+-- Insertion de données pour la table `consultation`
+INSERT INTO `consultation` (`consulation_date`, `motif`, `price`) VALUES
+('2023-04-01', 'Pneumologie', 40.00),
+('2023-05-02', 'Orthopédique', 30.00),
+('2023-06-03', 'Cardiologie', 50.00);
+
