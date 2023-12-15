@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/equipment")
+
 public class EquipmentController {
     @Autowired
     EquipmentService  equipmentService;

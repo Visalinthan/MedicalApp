@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/appointement")
+
 public class AppointementController {
     @Autowired
     AppointementService  appointementService;

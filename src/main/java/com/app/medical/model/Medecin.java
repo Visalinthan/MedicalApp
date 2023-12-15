@@ -13,9 +13,4 @@ public class Medecin extends User{
     private double rate;
     private String specialite;
 
-   /* @ManyToMany(fetch = FetchType.EAGER)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<MedicalServices> MedicalServices = new ArrayList<>() ;*/
-
-
 }

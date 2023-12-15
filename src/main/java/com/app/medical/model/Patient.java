@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity
-public class Patient extends User{
-
+public class Patient extends User {
 
 }
+

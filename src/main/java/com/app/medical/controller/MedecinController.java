@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/medecin")
+
 public class MedecinController {
     @Autowired
     MedecinService medecinService;

@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 @Data
 @AllArgsConstructor
@@ -18,6 +21,11 @@ public class MedicalFile {
 	@JoinColumn(name = "patient_id")
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Patient patient;
+
+
+	private ArrayList<Appointement> appointmentList;
+	private ArrayList<Consultation> consultationList;
+	private HashMap<String,String> statistiques;
 
 
 
