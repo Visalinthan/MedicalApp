@@ -6,7 +6,7 @@ INSERT INTO `medical_services` (`name`) VALUES
 ('Cardiologie'),
 ('Ophtalmologie'),
 ('Pédiatrie'),
-('Gynécologie'),
+    ('Gynécologie'),
 ('Laboratoire d''analyses médicales'),
 ('Orthopédie'),
 ('Psychiatrie');
