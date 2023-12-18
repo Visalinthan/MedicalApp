@@ -2,8 +2,8 @@ package com.app.medical.controller;
 
 import com.app.medical.controller.exceptions.AddException;
 import com.app.medical.controller.exceptions.NotFound;
-import com.app.medical.model.MedicalServices;
-import com.app.medical.services.MedicalServices_Service;
+import com.app.medical.model.Specialities;
+import com.app.medical.services.SpecialitiesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,27 +16,27 @@ import java.util.Optional;
 @RequestMapping("api/medicalservices")
 public class MedicalServicesController {
     @Autowired
-    MedicalServices_Service medicalservices;
+    SpecialitiesService medicalservices;
 
     @GetMapping("/list")
-    public List<MedicalServices> listOfAllMedicalServices() {
+    public List<Specialities> listOfAllMedicalServices() {
         return medicalservices.list();
     }
 
     @GetMapping("/get/{id}")
-    public MedicalServices getMedicalServiceById(@PathVariable Long id) {
-        Optional<MedicalServices> medicalfile = medicalservices.findById(id);
+    public Specialities getMedicalServiceById(@PathVariable Long id) {
+        Optional<Specialities> medicalfile = medicalservices.findById(id);
         return medicalfile.orElseThrow(()-> new NotFound("Le medicalService avec l'id " + id + " est INTROUVABLE. "));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<MedicalServices> addMedicalService(@RequestBody MedicalServices medicalServices) {
+    public ResponseEntity<Specialities> addMedicalService(@RequestBody Specialities specialities) {
 
-        MedicalServices newMedicalServices = medicalservices.saveMedicalServices(medicalServices) ;
+        Specialities newSpecialities = medicalservices.saveMedicalServices(specialities) ;
 
-        if(newMedicalServices == null) throw new AddException("Impossible d'ajouter le MedicalService");
+        if(newSpecialities == null) throw new AddException("Impossible d'ajouter le MedicalService");
 
-        return new ResponseEntity<MedicalServices>(medicalServices, HttpStatus.CREATED);
+        return new ResponseEntity<Specialities>(specialities, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")

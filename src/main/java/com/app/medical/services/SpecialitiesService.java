@@ -1,7 +1,7 @@
 package com.app.medical.services;
 
 
-import com.app.medical.model.MedicalServices;
+import com.app.medical.model.Specialities;
 import com.app.medical.repository.MedicalServicesRepo;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +17,12 @@ public class MedicalServices_Service {
         this.medicalServicesRepo = medicalServicesRepo ;
     }
 
-    public List<MedicalServices> list(){return this.medicalServicesRepo.findAll();}
+    public List<Specialities> list(){return this.medicalServicesRepo.findAll();}
 
-    public Optional<MedicalServices> findById(Long id){return this.medicalServicesRepo.findById(id);}
+    public Optional<Specialities> findById(Long id){return this.medicalServicesRepo.findById(id);}
 
-    public  MedicalServices saveMedicalServices(MedicalServices medicalServices){
-        return this.medicalServicesRepo.save(medicalServices);
+    public Specialities saveMedicalServices(Specialities specialities){
+        return this.medicalServicesRepo.save(specialities);
     }
 
     //méthode de suppression Rendez-vous
