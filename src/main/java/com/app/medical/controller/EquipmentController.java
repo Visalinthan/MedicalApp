@@ -17,35 +17,52 @@ import java.util.Optional;
 @RequestMapping("api/equipment")
 
 public class EquipmentController {
+
+    private final EquipmentService equipmentService;
+
     @Autowired
-    EquipmentService  equipmentService;
-
-    @GetMapping("/list")
-    public List<Equipment> listOfAllEquipments() {
-        return equipmentService.list();
+    public EquipmentController(EquipmentService equipmentService) {
+        this.equipmentService = equipmentService;
     }
 
-    @GetMapping("/get/{id}")
-    public Equipment getEquipmentById(@PathVariable Long id) {
-        Optional<Equipment> appointement = equipmentService.findById(id);
-        return appointement.orElseThrow(()-> new NotFound("Le equipement avec l'id " + id + " est INTROUVABLE. "));
+    // Get all equipment
+    @GetMapping
+    public ResponseEntity<List<Equipment>> getAllEquipment() {
+        List<Equipment> equipmentList = equipmentService.getAllEquipment();
+        return new ResponseEntity<>(equipmentList, HttpStatus.OK);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Equipment> addEquipments(@RequestBody Equipment equipment) {
-
-        Equipment newEquipment = equipmentService.saveEquipment(equipment);
-
-        if(newEquipment == null) throw new AddException("Impossible d'ajouter le equipement");
-
-        return new ResponseEntity<Equipment>(equipment, HttpStatus.CREATED);
+    // Get equipment by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Equipment> getEquipmentById(@PathVariable Long id) {
+        try {
+            Equipment equipment = equipmentService.findEquipmentById(id)
+                    .orElseThrow(() -> new NotFound("Equipment not found with ID: " + id));
+            return new ResponseEntity<>(equipment, HttpStatus.OK);
+        } catch (NotFound e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteEquipment(@PathVariable Long id) {
+    // Create or update equipment
+    @PostMapping
+    public ResponseEntity<Equipment> createOrUpdateEquipment(@RequestBody Equipment equipment) {
+        try {
+            Equipment savedEquipment = equipmentService.saveEquipment(equipment);
+            return new ResponseEntity<>(savedEquipment, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
-        equipmentService.deleteEquipment(id);
-
-         return ResponseEntity.noContent().build();
+    // Delete equipment by ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEquipment(@PathVariable Long id) {
+        try {
+            equipmentService.deleteEquipment(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (NotFound e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

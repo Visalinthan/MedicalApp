@@ -8,9 +8,13 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@PrimaryKeyJoinColumn( name = "user_id" )
 public class Medecin extends User{
-    private String cin;
+
     private double rate;
-    private String specialite;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "specialite_id")
+    private Specialities specialities;
 
 }

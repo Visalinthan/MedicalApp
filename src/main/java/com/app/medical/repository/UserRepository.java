@@ -1,2 +1,10 @@
-package com.app.medical.repository;public interface UserRepository {
+package com.app.medical.repository;
+
+import com.app.medical.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User,Long> {
+     Optional<User> findByUsername(String username);
 }

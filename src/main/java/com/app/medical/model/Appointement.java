@@ -15,10 +15,9 @@ public class Appointement {
 	private Long id;
 	private String date ;
 	private String hour ;
-	private String typofillness ;
+	private String type ;
 	private String description ;
 
-	//private List<Consultation> consultations = new ArrayList<Consultation>();
 
 	@JoinColumn(name = "medecin_id")
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -28,13 +27,13 @@ public class Appointement {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Patient patient;
 
-	@JoinColumn(name = "consultation_id")
 	@ManyToOne(fetch = FetchType.EAGER)
-	private Consultation consultation;
+	@JoinColumn(name = "medical_file_id")
+	private MedicalFile medicalFile;
 
-	@JoinColumn(name = "presciption_id")
 	@ManyToOne(fetch = FetchType.EAGER)
-	private  Prescription presciption;
+	@JoinColumn(name = "salle_id")
+	private Salle salle;
 
 
 }

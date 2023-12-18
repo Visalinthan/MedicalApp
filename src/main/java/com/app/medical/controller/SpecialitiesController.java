@@ -1,6 +1,5 @@
 package com.app.medical.controller;
 
-import com.app.medical.controller.exceptions.AddException;
 import com.app.medical.controller.exceptions.NotFound;
 import com.app.medical.model.Specialities;
 import com.app.medical.services.SpecialitiesService;
@@ -10,40 +9,47 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/medicalservices")
-public class MedicalServicesController {
+public class SpecialitiesController {
+
     @Autowired
-    SpecialitiesService medicalservices;
+    SpecialitiesService specialitiesService;
 
     @GetMapping("/list")
     public List<Specialities> listOfAllMedicalServices() {
-        return medicalservices.list();
+        return specialitiesService.getAllMedicalServices();
     }
 
     @GetMapping("/get/{id}")
-    public Specialities getMedicalServiceById(@PathVariable Long id) {
-        Optional<Specialities> medicalfile = medicalservices.findById(id);
-        return medicalfile.orElseThrow(()-> new NotFound("Le medicalService avec l'id " + id + " est INTROUVABLE. "));
+    public ResponseEntity<Object> getMedicalServiceById(@PathVariable Long id) {
+        try {
+            Specialities specialities = specialitiesService.findMedicalServiceById(id)
+                    .orElseThrow(() -> new NotFound("Medical service not found with ID: " + id));
+            return new ResponseEntity<>(specialities, HttpStatus.OK);
+        } catch (NotFound e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Specialities> addMedicalService(@RequestBody Specialities specialities) {
-
-        Specialities newSpecialities = medicalservices.saveMedicalServices(specialities) ;
-
-        if(newSpecialities == null) throw new AddException("Impossible d'ajouter le MedicalService");
-
-        return new ResponseEntity<Specialities>(specialities, HttpStatus.CREATED);
+    public ResponseEntity<Object> addMedicalService(@RequestBody Specialities specialities) {
+        try {
+            Specialities newSpecialities = specialitiesService.saveMedicalServices(specialities);
+            return new ResponseEntity<>(newSpecialities, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteMedicalFile(@PathVariable Long id) {
-
-        medicalservices.deleteMedicalServices(id);
-
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Object> deleteMedicalService(@PathVariable Long id) {
+        try {
+            specialitiesService.deleteMedicalServices(id);
+            return ResponseEntity.noContent().build();
+        } catch (NotFound e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 }

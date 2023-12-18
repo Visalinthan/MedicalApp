@@ -1,8 +1,6 @@
 package com.app.medical.controller;
 
-import com.app.medical.controller.exceptions.AddException;
 import com.app.medical.controller.exceptions.NotFound;
-import com.app.medical.dto.UserDto;
 import com.app.medical.model.Patient;
 import com.app.medical.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,54 +9,67 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/patient")
 public class PatientController {
-    @Autowired
-    PatientService patientService;
+    private final PatientService patientService;
 
-    @PostMapping("/login")
-    public ResponseEntity<?> loginPatient(@RequestBody UserDto user) {
-        AddException msg = new AddException("Identifiant or password incorrect");
-        Patient patient = patientService.findByEmail(user.getEmail());
-        if (patient == null)
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg.getMessage());
-        if (patient.getPassword().equals(user.getPassword())) {
-            return ResponseEntity.ok(patient);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg.getMessage());
+    @Autowired
+    public PatientController(PatientService patientService) {
+        this.patientService = patientService;
+    }
+
+    // Get all patients
+    @GetMapping
+    public ResponseEntity<List<Patient>> getAllPatients() {
+        List<Patient> patientList = patientService.getAllPatients();
+        return new ResponseEntity<>(patientList, HttpStatus.OK);
+    }
+
+    // Get patient by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getPatientById(@PathVariable Long id) {
+        try {
+            Patient patient = patientService.findPatientById(id)
+                    .orElseThrow(() -> new NotFound("Patient not found with ID: " + id));
+            return new ResponseEntity<>(patient, HttpStatus.OK);
+        } catch (NotFound e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
-    @GetMapping("/list")
-    public List<Patient> listOfAllPatient() {
-        return patientService.list();
+    // Get patient by email
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Object> getPatientByEmail(@PathVariable String email) {
+        try {
+            Patient patient = patientService.findPatientByEmail(email);
+            return new ResponseEntity<>(patient, HttpStatus.OK);
+        } catch (NotFound e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
-    @GetMapping("/get/{id}")
-    public Patient getPatientById(@PathVariable Long id) {
-        Optional<Patient> patient = patientService.findById(id);
-        return patient.orElseThrow(()-> new NotFound("Le patient avec l'id " + id + " est INTROUVABLE. "));
+    // Create or update patient
+    @PostMapping
+    public ResponseEntity<Object> createOrUpdatePatient(@RequestBody Patient patient) {
+        try {
+            Patient savedPatient = patientService.savePatient(patient);
+            return new ResponseEntity<>(savedPatient, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Patient> addPatient(@RequestBody Patient patient) {
-        patient.setRole("patient");
-        Patient newPatient = patientService.savePatient(patient);
-
-        if(newPatient == null) throw new AddException("Impossible d'ajouter le patient");
-
-        return new ResponseEntity<Patient>(patient, HttpStatus.CREATED);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deletePatient(@PathVariable Long id) {
-
-        patientService.deletePatient(id);
-
-        return ResponseEntity.noContent().build();
+    // Delete patient by ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deletePatient(@PathVariable Long id) {
+        try {
+            patientService.deletePatient(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (NotFound e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
 }

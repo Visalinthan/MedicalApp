@@ -3,10 +3,11 @@ package com.app.medical.model;
 import javax.persistence.*;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -17,16 +18,15 @@ public class MedicalFile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String description;
 
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "patient_id")
-	@ManyToOne(cascade = CascadeType.ALL)
 	private Patient patient;
 
-
-	private ArrayList<Appointement> appointmentList;
-	private ArrayList<Consultation> consultationList;
-	private HashMap<String,String> statistiques;
-
+	@ManyToMany(fetch = FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private Set<Ilness> typofillness = new HashSet<>();
 
 
 }
